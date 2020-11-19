@@ -3,7 +3,7 @@ const router = express.Router();
 const connection = require("../config");
 
 router.get("/", (req, res) => {
-	connection.query("SELECT * FROM user", (err, results) => {
+	connection.query("SELECT * FROM ride", (err, results) => {
 		if (err) {
 			res.sendStatus(500);
 		} else {
@@ -14,7 +14,7 @@ router.get("/", (req, res) => {
 
 router.get("/:id", (req, res) => {
 	const id = req.params.id;
-	connection.query("SELECT * FROM user WHERE id = ?", [id], (err, results) => {
+	connection.query("SELECT * FROM ride WHERE id = ?", [id], (err, results) => {
 		if (err) {
 			res.sendStatus(500);
 		} else {
@@ -23,4 +23,4 @@ router.get("/:id", (req, res) => {
 	});
 });
 
-module.exports = router;
+// module.exports = router;
