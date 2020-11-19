@@ -3,11 +3,17 @@ const router = express.Router();
 const connection = require("../config");
 
 router.get("/", (req, res) => {
-	connection.query("SELECT * FROM ride", (err, results) => {
+	let sql = "SELECT * FROM ride";
+	let sqlValues = [];
+	if (req.query.color) {
+		sql += " WHERE city=?";
+		sqlValues.push(req.query.city);
+	}
+	connection.query(sql, sqlValues, (err, results) => {
 		if (err) {
-			res.sendStatus(500);
+			res.status(500).send("Error retrieving data");
 		} else {
-			res.json(results);
+			res.status(200).json(results);
 		}
 	});
 });
