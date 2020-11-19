@@ -5,8 +5,8 @@ const connection = require("../config");
 router.get("/", (req, res) => {
 	let sql = "SELECT * FROM ride";
 	let sqlValues = [];
-	if (req.query.color) {
-		sql += " WHERE city=?";
+	if (req.query.city) {
+		sql += " WHERE city= ?";
 		sqlValues.push(req.query.city);
 	}
 	connection.query(sql, sqlValues, (err, results) => {
